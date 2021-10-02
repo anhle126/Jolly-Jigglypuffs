@@ -1,0 +1,50 @@
+#header {
+    height: 15%;
+    background-color: brown;
+    margin: 0px;
+}
+#body {
+    background-color: crimson;
+    height: auto;
+    margin: 0px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    column-gap: 10px;
+    border: 2px solid hotpink;
+}
+#img {
+    padding: 10px;
+    /*border: 2px solid blueviolet;*/
+    text-align: center;
+}
+#info {
+    padding: 10px;
+    width: 80%;
+    font-family: Algerian, fantasy;
+    font-size: 100px;
+    text-align: center;
+    background-color: green;
+}
+#name {
+    padding: 10px;
+    height: auto;
+    border: 2px solid green;
+}
+#tabs {
+    padding: 10px;
+    border: 2px solid green;
+}
+#poke {
+    width: 80%;
+
+}
+table {
+    text-align: center;
+}
+button {
+    width: 100px;
+}
