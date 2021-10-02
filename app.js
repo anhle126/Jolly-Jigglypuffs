@@ -77,4 +77,4 @@ async function main() {
     printLocation("bulbasaur");
     printEvolution("bulbasaur");
 }
-main();
+main()
