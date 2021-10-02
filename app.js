@@ -1,16 +1,3 @@
-//Height, weight, hp, atk, def, sp.atk, sp.def, speed 
-//Height and weight can be found in /pokemon endpoint
-//HP is health point, Atk is attack, Def is defense, sp.atk is special attack
-//sp.def is special defense, speed is duh, speed. All of these are found in pokemon/id at stats.stat
-//Base stats are found in Pokemon/stat.
-
-//Moves can be found in pokemon/id/move endpoint
-
-//Location can be found in pokemon/location_area_encounters
-
-//Evolution
-
-
 const baseURL = "https://pokeapi.co/api/v2"
 
 
