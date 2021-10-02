@@ -1,9 +1,34 @@
 #header {
-    height: 15%;
+    height: 70px;
     background-color: brown;
     margin: 0px;
     outline: 0px;
-    padding: 0px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+#bigCircle {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%; 
+    background-color:dodgerblue;
+    margin-right: 20px;
+}
+#sc1 {
+    background-color: orangered;
+
+}
+#sc2 {
+    background-color:forestgreen;
+}
+#sc3 {
+    background-color: yellow;
+}
+.smallCircle {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin-right: 13px;
 }
 #body {
     background-color: crimson;
