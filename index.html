@@ -6,36 +6,43 @@
     <link rel = "stylesheet" type = "text/css" href = "style.css" />
     <body>
         <div id="header">
+            <div id="bigCircle"></div>
+            <div id="sc1" class="smallCircle"></div>
+            <div id="sc2" class="smallCircle"></div>
+            <div id="sc3" class="smallCircle"></div>
         </div>
         <div id="body">
-            <div id = "img">
-                <img id = "poke" src = "images/Ditto.jpg" />
+            <div id="grid1">
+                <img id="poke" src="images/Ditto.jpg" style="height:auto;"/>
+                <div id= "info">
+                    <i>Bits Of Good</i><br><b>Proj1</b>
+                </div>
             </div>
-            <div id="projectTitle">
-                <i>Bits Of Good</i><br><b>Proj1</b>
-            </div>
-            <div id = "name">
-                <input id = "pokemonID", type = "text">
-                <table>
-                    <tr>
-                        <td><div></div></td>
-                        <td><div></div></td>
-                        <td><button id = "backward"><img src="images/la.png" style="width: 10px"></button></td>
-                        <td><button id = "forward"><img src="images/ra.jpg" style="width: 10px"></button></td>
-                    </tr>
-                </table>
-            </div>
-            <div id="tabs">
-                <table>
-                    <tr>
-                        <td><button id = "INFO">INFO</button></td>
-                        <td><button id = "MOVES">MOVES</button></td>
-                    </tr>
-                    <tr>
-                        <td><button id = "LOCATION">LOCATION</button></td>
-                        <td><button id = "EVOLUTION">EVOLUTION</button></td>
-                    </tr>
-                </table>
+            <div id="grid2">
+                <div id="name">
+                    <input type="text" id="search"> <br/><br/>
+                    <table id="typeTable">
+                        <tr>
+                            <td class ="type" id="type1">Normal</td>
+                            <td class="type" id="type2">None</td>
+                            <td style="width: 5%;"></td>
+                            <td class="arrow"><img src="images/la.png" style="width: 20px;"></td>
+                            <td class="arrow"><img src="images/ra.png" style="width: 20px;"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="tabs">
+                    <table id="tabsTable">
+                        <tr>
+                            <td><button id = "INFO">INFO</button></td>
+                            <td><button id = "MOVES">MOVES</button></td>
+                        </tr>
+                        <tr>
+                            <td><button id = "LOCATION">LOCATION</button></td>
+                            <td><button id = "EVOLUTION">EVOLUTION</button></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </body>
