@@ -24,7 +24,36 @@ document.addEventListener('click', c => {
     } else if (c.target === document.getElementById("EVOLUTION")) {
         let pokemonID = document.getElementById("search").value;
         printEvolution(pokemonID);
-    } 
+    } else if (c.target === document.getElementById("back")) {
+        let index = 0;
+        let pokemonID = document.getElementById("search").value;
+
+        for (let i = 0; i < pokemonArray.length; i++) {
+            if (pokemonArray[i] === pokemonID) {
+                index = i;
+                break;
+            }
+        }
+        let prevPokemon = pokemonArray[(index - 1) % pokemonArray.length];
+        console.log(prevPokemon);
+        document.getElementById("search").innerHTML = prevPokemon;
+        printInfo(prevPokemon);
+    } else if (c.target === document.getElementById("next")) {
+        let index = 0;
+        let pokemonID = document.getElementById("search").value;
+        
+        for (let i = 0; i < pokemonArray.length; i++) {
+            if (pokemonArray[i] === pokemonID) {
+                index = i;
+                break;
+            }
+        }
+        console.log(index);
+        let nextPokemon = pokemonArray[(index + 1) % pokemonArray.length];
+        console.log(nextPokemon);
+        document.getElementById("search").innerHTML = nextPokemon;
+        printInfo(nextPokemon);
+    }
 })
 
 
@@ -40,7 +69,7 @@ async function printInfo(pokemonID) {
         stats += infoData.stats[i].stat.name + ": " + infoData.stats[i].base_stat + "<br/>";
     }
 
-    document.getElementById("info").innerHTML = "INFO<br/>" + height + weight + stats;
+    document.getElementById("projectTitle").innerHTML = "INFO<br/>" + height + weight + stats;
 
 }
 
@@ -53,7 +82,7 @@ async function printMoves(pokemonID) {
         moves += infoData.moves[i].move.name + "<br/>";
     }
 
-    document.getElementById("info").innerHTML = "MOVES<br/>" + moves;
+    document.getElementById("projectTitle").innerHTML = "MOVES<br/>" + moves;
 }
 
 async function printLocation(pokemonID) {
@@ -70,7 +99,7 @@ async function printLocation(pokemonID) {
         locationList = "CAN NOT BE CAUGHT IN THE WILD<br/>";
     }
 
-    document.getElementById("info").innerHTML = "LOCATIONS<br/>" + locationList;
+    document.getElementById("projectTitle").innerHTML = "LOCATIONS<br/>" + locationList;
 }
 
 async function printEvolution(pokemonID) {
@@ -90,7 +119,7 @@ async function printEvolution(pokemonID) {
         evolutionChain = evolutionChain[0].evolves_to;
     }
     
-    document.getElementById("info").innerHTML = "EVOLUTION<br/>" + resultEvolution;
+    document.getElementById("projectTitle").innerHTML = "EVOLUTION<br/>" + resultEvolution;
 
 }
 

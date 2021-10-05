@@ -2,37 +2,37 @@
     <head>
         <title>Pokedex</title>
     </head>
-    <script src = "app.js"></script>
+    
     <link rel = "stylesheet" type = "text/css" href = "style.css" />
     <body>
         <div id="header">
-            <div id="bigCircle"></div>
-            <div id="sc1" class="smallCircle"></div>
-            <div id="sc2" class="smallCircle"></div>
-            <div id="sc3" class="smallCircle"></div>
+            <div id = "bigCircle"></div>
+            <div id = "sc1" class = "smallCircle"></div>
+            <div id = "sc2" class = "smallCircle"></div>
+            <div id = "sc3" class = "smallCircle"></div>
         </div>
-        <div id="body">
-            <div id="grid1">
-                <img id="poke" src="images/Ditto.jpg" style="height:auto;"/>
-                <div id= "info">
+        <div id = "body">
+            <div id = "grid1">
+                <img id = "poke" src = "images/Ditto.jpg" style = "height:auto;"/>
+                <div id = "projectTitle">
                     <i>Bits Of Good</i><br><b>Proj1</b>
                 </div>
             </div>
-            <div id="grid2">
-                <div id="name">
-                    <input type="text" id="search"> <br/><br/>
-                    <table id="typeTable">
+            <div id = "grid2">
+                <div id = "name">
+                    <input type = "text" id = "search"> <br/><br/>
+                    <table id = "typeTable">
                         <tr>
-                            <td class ="type" id="type1">Normal</td>
-                            <td class="type" id="type2">None</td>
-                            <td style="width: 5%;"></td>
-                            <td class="arrow"><img src="images/la.png" style="width: 20px;"></td>
-                            <td class="arrow"><img src="images/ra.png" style="width: 20px;"></td>
+                            <td class = "type" id = "type1">Normal</td>
+                            <td class = "type" id = "type2">None</td>
+                            <td style = "width: 5%;"></td>
+                            <button class = "arrow", id = "back"><img src = "images/la.png" style = "width: 20px;"></td>
+                            <button class = "arrow", id = "next"><img src = "images/ra.png" style = "width: 20px;"></td>
                         </tr>
                     </table>
                 </div>
-                <div id="tabs">
-                    <table id="tabsTable">
+                <div id = "tabs">
+                    <table id = "tabsTable">
                         <tr>
                             <td><button id = "INFO">INFO</button></td>
                             <td><button id = "MOVES">MOVES</button></td>
@@ -45,5 +45,6 @@
                 </div>
             </div>
         </div>
+        <script src = "app.js"></script>
     </body>
 </html>
