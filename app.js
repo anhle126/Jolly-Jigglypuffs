@@ -5,6 +5,7 @@ let pokemonArray = new Array();
 
 document.addEventListener('keypress', e => {
     if (e.key === "Enter") {
+        document.getElementById("projectTitle").style.fontSize = "x-large";
         let pokemonID = document.getElementById("search").value;
         printInfo(pokemonID);
     }
