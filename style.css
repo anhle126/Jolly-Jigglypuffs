@@ -70,6 +70,7 @@
     font-size: 20px;
     text-align: center;
     background-color:rgb(0, 201, 0);
+    overflow-y:auto
 }
 #name {
     padding: 10px;
