@@ -34,12 +34,18 @@ document.addEventListener('click', (c) => {
         break;
       }
     }
-    let prevPokemon = pokemonArray[(index - 1) % pokemonArray.length];
-    console.log(prevPokemon);
-    const newPokemon = pokemonArray[index + 1];
-    console.log(newPokemon);
-    document.getElementById('search').value = newPokemon;
-    printInfo(newPokemon);
+    console.log(index); //remove
+    let newIndex = index--; //remove
+    let nextPokemon = pokemonArray[newIndex % pokemonArray.length]; //remove
+    console.log(nextPokemon); //remove
+    document.getElementById('search').value = nextPokemon; //remove
+    printInfo(nextPokemon); //remove
+    // let prevPokemon = pokemonArray[(index - 1) % pokemonArray.length];
+    // console.log(prevPokemon);
+    // const newPokemon = pokemonArray[index + 1];
+    // console.log(newPokemon);
+    // document.getElementById('search').value = newPokemon;
+    // printInfo(newPokemon);
   } else if (c.target === document.getElementById('next')) {
     let index = 0;
     let pokemonID = document.getElementById('search').value;
@@ -51,7 +57,9 @@ document.addEventListener('click', (c) => {
       }
     }
     console.log(index);
-    let newIndex = index++;
+    console.log(pokemonArray); //remove
+    let newIndex = (index += 1); //remove
+    //let newIndex = index++;
     let nextPokemon = pokemonArray[newIndex % pokemonArray.length];
     console.log(nextPokemon);
     document.getElementById('search').value = nextPokemon;
@@ -89,8 +97,8 @@ async function printMoves(pokemonID) {
     moves += infoData.moves[i].move.name.replace(/-/g, ' ') + '<br/>';
   }
 
-    document.getElementById("projectTitle").innerHTML = "MOVES<br/>" + moves;
-    printPhoto(pokemonID);
+  document.getElementById("projectTitle").innerHTML = "MOVES<br/>" + moves;
+  //printPhoto(pokemonID);
 }
 
 async function printLocation(pokemonID) {
@@ -120,36 +128,36 @@ async function printEvolution(pokemonID) {
   const evolutionURL = evolution.evolution_chain.url;
   const getEvolutionData = await fetch(evolutionURL);
   const evolutionData = await getEvolutionData.json();
-    console.log(evolutionData);
+  console.log(evolutionData);
   let resultEvolution = '';
   resultEvolution += evolutionData.chain.species.name + '<br/>';
   let evolutionChain = evolutionData.chain.evolves_to;
 
-    while (evolutionChain.length > 0) {
-        resultEvolution += evolutionChain[0].species.name + "<br/>";
-        evolutionChain = evolutionChain[0].evolves_to;
-    }
-    
-    document.getElementById("projectTitle").innerHTML = "EVOLUTION<br/>" + resultEvolution;
-    printPhoto(pokemonID);
+  while (evolutionChain.length > 0) {
+    resultEvolution += evolutionChain[0].species.name + "<br/>";
+    evolutionChain = evolutionChain[0].evolves_to;
+  }
+
+  document.getElementById("projectTitle").innerHTML = "EVOLUTION<br/>" + resultEvolution;
+//printPhoto(pokemonID);
 }
 
 async function buildPokemonArray() {
 
-    const initialResponse = await fetch(baseURL + "/pokemon");
-    const parsedResponse = await initialResponse.json();
-    let count = 0;
-    for (let i = 0; i < parsedResponse.results.length; i++) {
-        pokemonArray[i] = parsedResponse.results[i].name;
-    }
-    console.log(pokemonArray);
+  const initialResponse = await fetch(baseURL + "/pokemon");
+  const parsedResponse = await initialResponse.json();
+  let count = 0;
+  for (let i = 0; i < parsedResponse.results.length; i++) {
+    pokemonArray[i] = parsedResponse.results[i].name;
+  }
+  console.log(pokemonArray);
 }
 
-async function printPhoto (pokemonID) {
-    const response = await fetch(baseURL + "/pokemon/" + pokemonID);
-    const responseJSON = await response.json();
+//async function printPhoto (pokemonID) {
+//     const response = await fetch(baseURL + "/pokemon/" + pokemonID);
+//     const responseJSON = await response.json();
 
-    let photoURL = responseJSON.sprites.front_default;
-    document.getElementById("poke").src = photoURL;
-    console.log(photoURL);
-}
+//     let photoURL = responseJSON.sprites.front_default;
+//     document.getElementById("poke").src = photoURL;
+//     console.log(photoURL);
+// }
