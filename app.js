@@ -77,11 +77,32 @@ async function printInfo(pokemonID) {
   let stats = '';
 
   for (let i = 0; i < infoData.stats.length; i++) {
+<<<<<<< HEAD
     stats += infoData.stats[i].stat.name + ': ' + infoData.stats[i].base_stat + '<br/>';
   }
 
   document.getElementById('projectTitle').innerHTML = 'INFO<br/><br/>' + height + weight + stats;
   printPhoto(pokemonID);
+=======
+    stats +=
+      infoData.stats[i].stat.name.replace(/-/g, ' ') +
+      ': ' +
+      infoData.stats[i].base_stat +
+      '<br/>';
+  }
+
+  document.getElementById('projectTitle').innerHTML =
+    'INFO<br/><br/>' + height + weight + stats;
+  //printPhoto(pokemonID);
+
+  //document.getElementById('search').value = infoData.name.charAt(0).toUpperCase() + infoData.name.substr(1);
+  document.getElementById('type1').innerHTML = infoData.types[0].type.name.charAt(0).toUpperCase() + infoData.types[0].type.name.substr(1);
+  if (infoData.types.length === 2) {
+    document.getElementById('type2').innerHTML = infoData.types[1].type.name.charAt().toUpperCase() + infoData.types[1].type.name.substr(1);
+  } else {
+    document.getElementById('type2').innerHTML = 'None';
+  }
+>>>>>>> 921eb56553634823908dfa054d86530cc08975b2
 }
 
 
