@@ -62,6 +62,7 @@ document.addEventListener('click', (c) => {
 async function printInfo(pokemonID) {
   const response = await fetch(baseURL + '/pokemon/' + pokemonID);
   const infoData = await response.json();
+  console.log(infoData);
 
   let height = 'height: ' + infoData.height + ' m<br/>';
   let weight = 'weight: ' + infoData.weight + ' lbs<br/>';
@@ -76,7 +77,7 @@ async function printInfo(pokemonID) {
   }
 
   document.getElementById('projectTitle').innerHTML =
-    'INFO<br/>' + height + weight + stats;
+    'INFO<br/><br/>' + height + weight + stats;
 }
 
 async function printMoves(pokemonID) {
@@ -88,7 +89,7 @@ async function printMoves(pokemonID) {
     moves += infoData.moves[i].move.name + '<br/>';
   }
 
-  document.getElementById('projectTitle').innerHTML = 'MOVES<br/>' + moves;
+  document.getElementById('projectTitle').innerHTML = 'MOVES<br/><br/>' + moves;
 }
 
 async function printLocation(pokemonID) {
@@ -108,7 +109,7 @@ async function printLocation(pokemonID) {
   }
 
   document.getElementById('projectTitle').innerHTML =
-    'LOCATIONS<br/>' + locationList;
+    'LOCATIONS<br/><br/>' + locationList;
 }
 
 async function printEvolution(pokemonID) {
@@ -129,7 +130,7 @@ async function printEvolution(pokemonID) {
   }
 
   document.getElementById('projectTitle').innerHTML =
-    'EVOLUTION<br/>' + resultEvolution;
+    'EVOLUTION<br/><br/>' + resultEvolution;
 }
 
 async function buildPokemonArray() {
