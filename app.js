@@ -34,12 +34,10 @@ document.addEventListener('click', (c) => {
         break;
       }
     }
-    let prevPokemon = pokemonArray[(index - 1) % pokemonArray.length];
-    console.log(prevPokemon);
-    const newPokemon = pokemonArray[index + 1];
-    console.log(newPokemon);
-    document.getElementById('search').value = newPokemon;
-    printInfo(newPokemon);
+    let prevPokemon = pokemonArray[modulo(index-1, pokemonArray.length)];
+    document.getElementById('search').value = prevPokemon;
+    printInfo(prevPokemon);
+
   } else if (c.target === document.getElementById('next')) {
     let index = 0;
     let pokemonID = document.getElementById('search').value;
@@ -50,10 +48,8 @@ document.addEventListener('click', (c) => {
         break;
       }
     }
-    console.log(index);
-    let newIndex = index++;
-    let nextPokemon = pokemonArray[newIndex % pokemonArray.length];
-    console.log(nextPokemon);
+
+    let nextPokemon = pokemonArray[modulo(index + 1, pokemonArray.length)];
     document.getElementById('search').value = nextPokemon;
     printInfo(nextPokemon);
   }
@@ -78,6 +74,8 @@ async function printInfo(pokemonID) {
 
   document.getElementById('projectTitle').innerHTML =
     'INFO<br/><br/>' + height + weight + stats;
+
+    printPhoto(pokemonID);
 }
 
 async function printMoves(pokemonID) {
@@ -111,6 +109,7 @@ async function printLocation(pokemonID) {
 
   document.getElementById('projectTitle').innerHTML =
     'LOCATIONS<br/><br/>' + locationList;
+    printPhoto(pokemonID);
 }
 
 async function printEvolution(pokemonID) {
@@ -152,4 +151,12 @@ async function printPhoto (pokemonID) {
     let photoURL = responseJSON.sprites.front_default;
     document.getElementById("poke").src = photoURL;
     console.log(photoURL);
+}
+
+
+function modulo(number, base) {
+    let result = number % base;
+    if (result < 0) 
+      return result + base;
+    return result;
 }
