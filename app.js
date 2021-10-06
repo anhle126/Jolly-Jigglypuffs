@@ -34,12 +34,12 @@ document.addEventListener('click', (c) => {
         break;
       }
     }
-    console.log(index);
-    let newIndex = index--;
-    let nextPokemon = pokemonArray[newIndex % pokemonArray.length];
-    console.log(nextPokemon);
-    document.getElementById('search').value = nextPokemon;
-    printInfo(nextPokemon);
+    let prevPokemon = pokemonArray[(index - 1) % pokemonArray.length];
+    console.log(prevPokemon);
+    const newPokemon = pokemonArray[index + 1];
+    console.log(newPokemon);
+    document.getElementById('search').value = newPokemon;
+    printInfo(newPokemon);
   } else if (c.target === document.getElementById('next')) {
     let index = 0;
     let pokemonID = document.getElementById('search').value;
@@ -51,8 +51,7 @@ document.addEventListener('click', (c) => {
       }
     }
     console.log(index);
-    console.log(pokemonArray);
-    let newIndex = (index += 1);
+    let newIndex = index++;
     let nextPokemon = pokemonArray[newIndex % pokemonArray.length];
     console.log(nextPokemon);
     document.getElementById('search').value = nextPokemon;
