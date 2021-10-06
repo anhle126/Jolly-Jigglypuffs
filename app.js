@@ -35,7 +35,12 @@ document.addEventListener('click', (c) => {
         break;
       }
     }
+
     //console.log(index); 
+    let prevPokemon = pokemonArray[modulo(index-1, pokemonArray.length)];
+    document.getElementById('search').value = prevPokemon;
+    printInfo(prevPokemon);
+
     let newIndex = index--; 
     let nextPokemon = pokemonArray[newIndex % pokemonArray.length]; 
     //console.log(nextPokemon); 
@@ -56,6 +61,9 @@ document.addEventListener('click', (c) => {
     let newIndex = (index += 1);
     let nextPokemon = pokemonArray[newIndex % pokemonArray.length];
     //console.log(nextPokemon);
+
+    let nextPokemon = pokemonArray[modulo(index + 1, pokemonArray.length)];
+
     document.getElementById('search').value = nextPokemon;
     printInfo(nextPokemon);
   }
@@ -165,4 +173,12 @@ async function printPhoto (pokemonID) {
     let photoURL = responseJSON.sprites.front_default;
     document.getElementById('poke').src = photoURL;
     //console.log(photoURL);
+}
+
+
+function modulo(number, base) {
+    let result = number % base;
+    if (result < 0) 
+      return result + base;
+    return result;
 }
