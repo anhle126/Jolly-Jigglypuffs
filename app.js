@@ -34,10 +34,19 @@ document.addEventListener('click', (c) => {
         break;
       }
     }
+<<<<<<< HEAD
     let prevPokemon = pokemonArray[modulo(index-1, pokemonArray.length)];
     document.getElementById('search').value = prevPokemon;
     printInfo(prevPokemon);
 
+=======
+    console.log(index); 
+    let newIndex = index--; 
+    let nextPokemon = pokemonArray[newIndex % pokemonArray.length]; 
+    console.log(nextPokemon); 
+    document.getElementById('search').value = nextPokemon; 
+    printInfo(nextPokemon); 
+>>>>>>> bc874a2a4a5f87349d5f2523773fb716654b58d2
   } else if (c.target === document.getElementById('next')) {
     let index = 0;
     let pokemonID = document.getElementById('search').value;
@@ -48,8 +57,16 @@ document.addEventListener('click', (c) => {
         break;
       }
     }
+<<<<<<< HEAD
 
     let nextPokemon = pokemonArray[modulo(index + 1, pokemonArray.length)];
+=======
+    console.log(index);
+    console.log(pokemonArray);
+    let newIndex = (index += 1);
+    let nextPokemon = pokemonArray[newIndex % pokemonArray.length];
+    console.log(nextPokemon);
+>>>>>>> bc874a2a4a5f87349d5f2523773fb716654b58d2
     document.getElementById('search').value = nextPokemon;
     printInfo(nextPokemon);
   }
@@ -58,7 +75,7 @@ document.addEventListener('click', (c) => {
 async function printInfo(pokemonID) {
   const response = await fetch(baseURL + '/pokemon/' + pokemonID);
   const infoData = await response.json();
-  console.log(infoData);
+  //console.log(infoData);
 
   let height = 'height: ' + infoData.height + ' m<br/>';
   let weight = 'weight: ' + infoData.weight + ' lbs<br/>';
@@ -84,11 +101,11 @@ async function printMoves(pokemonID) {
   let moves = '';
 
   for (let i = 0; i < infoData.moves.length; i++) {
-    moves += infoData.moves[i].move.name + '<br/>';
+    moves += infoData.moves[i].move.name.replace(/-/g, ' ') + '<br/>';
   }
 
-    document.getElementById("projectTitle").innerHTML = "MOVES<br/>" + moves;
-    printPhoto(pokemonID);
+  document.getElementById("projectTitle").innerHTML = "MOVES<br/>" + moves;
+  printPhoto(pokemonID);
 }
 
 async function printLocation(pokemonID) {
@@ -98,13 +115,14 @@ async function printLocation(pokemonID) {
 
   let locationList = '';
   const locations = await locationData.json();
+  //console.log(locations)
 
   for (let i = 0; i < locations.length; i++) {
-    locationList += locations[i].location_area.name + '<br/>';
+    locationList += locations[i].location_area.name.replace(/-/g, ' ') + '<br/>';
   }
 
   if (locationList === '') {
-    locationList = 'CAN NOT BE CAUGHT IN THE WILD<br/>';
+    locationList = 'CANNOT BE CAUGHT IN THE WILD<br/>';
   }
 
   document.getElementById('projectTitle').innerHTML =
@@ -116,32 +134,31 @@ async function printEvolution(pokemonID) {
   const getEvolution = await fetch(baseURL + '/pokemon-species/' + pokemonID);
   const evolution = await getEvolution.json();
   const evolutionURL = evolution.evolution_chain.url;
-
   const getEvolutionData = await fetch(evolutionURL);
   const evolutionData = await getEvolutionData.json();
-
+  console.log(evolutionData);
   let resultEvolution = '';
   resultEvolution += evolutionData.chain.species.name + '<br/>';
   let evolutionChain = evolutionData.chain.evolves_to;
 
-    while (evolutionChain.length > 0) {
-        resultEvolution += evolutionChain[0].species.name + "<br/>";
-        evolutionChain = evolutionChain[0].evolves_to;
-    }
-    
-    document.getElementById("projectTitle").innerHTML = "EVOLUTION<br/>" + resultEvolution;
-    printPhoto(pokemonID);
+  while (evolutionChain.length > 0) {
+    resultEvolution += evolutionChain[0].species.name + "<br/>";
+    evolutionChain = evolutionChain[0].evolves_to;
+  }
+
+  document.getElementById("projectTitle").innerHTML = "EVOLUTION<br/>" + resultEvolution;
+  printPhoto(pokemonID);
 }
 
 async function buildPokemonArray() {
 
-    const initialResponse = await fetch(baseURL + "/pokemon");
-    const parsedResponse = await initialResponse.json();
-    let count = 0;
-    for (let i = 0; i < parsedResponse.results.length; i++) {
-        pokemonArray[i] = parsedResponse.results[i].name;
-    }
-    console.log(pokemonArray);
+  const initialResponse = await fetch(baseURL + "/pokemon");
+  const parsedResponse = await initialResponse.json();
+  let count = 0;
+  for (let i = 0; i < parsedResponse.results.length; i++) {
+    pokemonArray[i] = parsedResponse.results[i].name;
+  }
+  console.log(pokemonArray);
 }
 
 async function printPhoto (pokemonID) {
