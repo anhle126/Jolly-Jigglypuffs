@@ -34,18 +34,12 @@ document.addEventListener('click', (c) => {
         break;
       }
     }
-    console.log(index); //remove
-    let newIndex = index--; //remove
-    let nextPokemon = pokemonArray[newIndex % pokemonArray.length]; //remove
-    console.log(nextPokemon); //remove
-    document.getElementById('search').value = nextPokemon; //remove
-    printInfo(nextPokemon); //remove
-    // let prevPokemon = pokemonArray[(index - 1) % pokemonArray.length];
-    // console.log(prevPokemon);
-    // const newPokemon = pokemonArray[index + 1];
-    // console.log(newPokemon);
-    // document.getElementById('search').value = newPokemon;
-    // printInfo(newPokemon);
+    console.log(index); 
+    let newIndex = index--; 
+    let nextPokemon = pokemonArray[newIndex % pokemonArray.length]; 
+    console.log(nextPokemon); 
+    document.getElementById('search').value = nextPokemon; 
+    printInfo(nextPokemon); 
   } else if (c.target === document.getElementById('next')) {
     let index = 0;
     let pokemonID = document.getElementById('search').value;
@@ -57,9 +51,8 @@ document.addEventListener('click', (c) => {
       }
     }
     console.log(index);
-    console.log(pokemonArray); //remove
-    let newIndex = (index += 1); //remove
-    //let newIndex = index++;
+    console.log(pokemonArray);
+    let newIndex = (index += 1);
     let nextPokemon = pokemonArray[newIndex % pokemonArray.length];
     console.log(nextPokemon);
     document.getElementById('search').value = nextPokemon;
@@ -98,7 +91,7 @@ async function printMoves(pokemonID) {
   }
 
   document.getElementById("projectTitle").innerHTML = "MOVES<br/>" + moves;
-  //printPhoto(pokemonID);
+  printPhoto(pokemonID);
 }
 
 async function printLocation(pokemonID) {
@@ -139,7 +132,7 @@ async function printEvolution(pokemonID) {
   }
 
   document.getElementById("projectTitle").innerHTML = "EVOLUTION<br/>" + resultEvolution;
-//printPhoto(pokemonID);
+  printPhoto(pokemonID);
 }
 
 async function buildPokemonArray() {
@@ -153,11 +146,11 @@ async function buildPokemonArray() {
   console.log(pokemonArray);
 }
 
-//async function printPhoto (pokemonID) {
-//     const response = await fetch(baseURL + "/pokemon/" + pokemonID);
-//     const responseJSON = await response.json();
+async function printPhoto (pokemonID) {
+    const response = await fetch(baseURL + "/pokemon/" + pokemonID);
+    const responseJSON = await response.json();
 
-//     let photoURL = responseJSON.sprites.front_default;
-//     document.getElementById("poke").src = photoURL;
-//     console.log(photoURL);
-// }
+    let photoURL = responseJSON.sprites.front_default;
+    document.getElementById("poke").src = photoURL;
+    console.log(photoURL);
+}
