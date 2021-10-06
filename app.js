@@ -5,8 +5,9 @@ let pokemonArray = new Array();
 document.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     document.getElementById('projectTitle').style.fontSize = 'x-large';
-    let pokemonID = document.getElementById('search').value;
+    let pokemonID = document.getElementById('search').value.toLowerCase();
     printInfo(pokemonID);
+    printPhoto(pokemonID);
   }
 });
 
@@ -74,9 +75,17 @@ async function printInfo(pokemonID) {
 
   document.getElementById('projectTitle').innerHTML =
     'INFO<br/><br/>' + height + weight + stats;
+  //printPhoto(pokemonID);
 
-    printPhoto(pokemonID);
+  document.getElementById('search').value = infoData.name.charAt(0).toUpperCase() + infoData.name.substr(1);
+  document.getElementById('type1').innerHTML = infoData.types[0].type.name.charAt(0).toUpperCase() + infoData.types[0].type.name.substr(1);
+  if (infoData.types.length === 2) {
+    document.getElementById('type2').innerHTML = infoData.types[1].type.name.charAt().toUpperCase() + infoData.types[1].type.name.substr(1);
+  } else {
+    document.getElementById('type2').innerHTML = 'None';
+  }
 }
+
 
 async function printMoves(pokemonID) {
   const response = await fetch(baseURL + '/pokemon/' + pokemonID);
@@ -87,8 +96,8 @@ async function printMoves(pokemonID) {
     moves += infoData.moves[i].move.name.replace(/-/g, ' ') + '<br/>';
   }
 
-  document.getElementById("projectTitle").innerHTML = "MOVES<br/>" + moves;
-  printPhoto(pokemonID);
+  document.getElementById('projectTitle').innerHTML = 'MOVES<br/><br/>' + moves;
+  //printPhoto(pokemonID);
 }
 
 async function printLocation(pokemonID) {
@@ -110,7 +119,7 @@ async function printLocation(pokemonID) {
 
   document.getElementById('projectTitle').innerHTML =
     'LOCATIONS<br/><br/>' + locationList;
-    printPhoto(pokemonID);
+  //printPhoto(pokemonID);
 }
 
 async function printEvolution(pokemonID) {
@@ -119,38 +128,38 @@ async function printEvolution(pokemonID) {
   const evolutionURL = evolution.evolution_chain.url;
   const getEvolutionData = await fetch(evolutionURL);
   const evolutionData = await getEvolutionData.json();
-  console.log(evolutionData);
+  //console.log(evolutionData);
   let resultEvolution = '';
   resultEvolution += evolutionData.chain.species.name + '<br/>';
   let evolutionChain = evolutionData.chain.evolves_to;
 
   while (evolutionChain.length > 0) {
-    resultEvolution += evolutionChain[0].species.name + "<br/>";
+    resultEvolution += evolutionChain[0].species.name + '<br/>';
     evolutionChain = evolutionChain[0].evolves_to;
   }
 
-  document.getElementById("projectTitle").innerHTML = "EVOLUTION<br/>" + resultEvolution;
-  printPhoto(pokemonID);
+  document.getElementById('projectTitle').innerHTML = 'EVOLUTION<br/><br/>' + resultEvolution;
+  //printPhoto(pokemonID);
 }
 
 async function buildPokemonArray() {
 
-  const initialResponse = await fetch(baseURL + "/pokemon");
+  const initialResponse = await fetch(baseURL + '/pokemon?offset=0&limit=151');
   const parsedResponse = await initialResponse.json();
   let count = 0;
   for (let i = 0; i < parsedResponse.results.length; i++) {
     pokemonArray[i] = parsedResponse.results[i].name;
   }
-  console.log(pokemonArray);
+  console.log(parsedResponse);
 }
 
 async function printPhoto (pokemonID) {
-    const response = await fetch(baseURL + "/pokemon/" + pokemonID);
+    const response = await fetch(baseURL + '/pokemon/' + pokemonID);
     const responseJSON = await response.json();
 
     let photoURL = responseJSON.sprites.front_default;
-    document.getElementById("poke").src = photoURL;
-    console.log(photoURL);
+    document.getElementById('poke').src = photoURL;
+    //console.log(photoURL);
 }
 
 
