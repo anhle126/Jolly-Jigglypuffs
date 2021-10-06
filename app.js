@@ -63,7 +63,7 @@ document.addEventListener('click', (c) => {
 async function printInfo(pokemonID) {
   const response = await fetch(baseURL + '/pokemon/' + pokemonID);
   const infoData = await response.json();
-  console.log(infoData);
+  //console.log(infoData);
 
   let height = 'height: ' + infoData.height + ' m<br/>';
   let weight = 'weight: ' + infoData.weight + ' lbs<br/>';
@@ -87,7 +87,7 @@ async function printMoves(pokemonID) {
   let moves = '';
 
   for (let i = 0; i < infoData.moves.length; i++) {
-    moves += infoData.moves[i].move.name + '<br/>';
+    moves += infoData.moves[i].move.name.replace(/-/g, ' ') + '<br/>';
   }
 
   document.getElementById('projectTitle').innerHTML = 'MOVES<br/><br/>' + moves;
@@ -100,13 +100,14 @@ async function printLocation(pokemonID) {
 
   let locationList = '';
   const locations = await locationData.json();
+  //console.log(locations)
 
   for (let i = 0; i < locations.length; i++) {
-    locationList += locations[i].location_area.name + '<br/>';
+    locationList += locations[i].location_area.name.replace(/-/g, ' ') + '<br/>';
   }
 
   if (locationList === '') {
-    locationList = 'CAN NOT BE CAUGHT IN THE WILD<br/>';
+    locationList = 'CANNOT BE CAUGHT IN THE WILD<br/>';
   }
 
   document.getElementById('projectTitle').innerHTML =
@@ -117,10 +118,9 @@ async function printEvolution(pokemonID) {
   const getEvolution = await fetch(baseURL + '/pokemon-species/' + pokemonID);
   const evolution = await getEvolution.json();
   const evolutionURL = evolution.evolution_chain.url;
-
   const getEvolutionData = await fetch(evolutionURL);
   const evolutionData = await getEvolutionData.json();
-
+    console.log(evolutionData);
   let resultEvolution = '';
   resultEvolution += evolutionData.chain.species.name + '<br/>';
   let evolutionChain = evolutionData.chain.evolves_to;
