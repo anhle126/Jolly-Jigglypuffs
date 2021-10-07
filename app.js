@@ -13,6 +13,28 @@ async function main() {
 
 main();
 
+const TypeColor = {
+  normal: "#a8a878",
+  fighting: "#c03028",
+  flying: "#a890f0",
+  poison: "#a040a0",
+  ground: "#e0c068",
+  rock: "#b8a038",
+  bug: "#a8b820",
+  ghost: "#705898",
+  steel: "#b8b8d0",
+  fire: "#f08030",
+  water: "#6890f0",
+  grass: "#78c850",
+  electric: "#f8d030",
+  psychic: "#f85888",
+  ice: "#98d8d8",
+  dragon: "#7038f8",
+  dark: "#705848",
+  fairy: "#ee99ac",
+  none: "gray"
+}
+
 document.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     document.getElementById('projectTitle').style.fontSize = 'x-large';
@@ -93,10 +115,14 @@ async function printInfo(pokemonID) {
 
   document.getElementById('search').value = infoData.name;
   document.getElementById('type1').innerHTML = infoData.types[0].type.name.charAt(0).toUpperCase() + infoData.types[0].type.name.substr(1);
+  document.getElementById('type1').style.backgroundColor = TypeColor[infoData.types[0].type.name];
+  console.log(infoData.types[0]);
   if (infoData.types.length === 2) {
     document.getElementById('type2').innerHTML = infoData.types[1].type.name.charAt().toUpperCase() + infoData.types[1].type.name.substr(1);
+    document.getElementById('type2').style.backgroundColor = TypeColor[infoData.types[1].type.name];
   } else {
     document.getElementById('type2').innerHTML = 'None';
+    document.getElementById('type2').style.backgroundColor = TypeColor['none'];
   }
 }
 
@@ -169,4 +195,3 @@ function modulo(number, base) {
       return result + base;
     return result;
 }
-
