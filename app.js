@@ -35,7 +35,8 @@ document.addEventListener('click', (c) => {
       }
     }
     console.log(index);
-    let newIndex = index--;
+    console.log(pokemonArray);
+    let newIndex = (index -= 1);
     let nextPokemon = pokemonArray[newIndex % pokemonArray.length];
     console.log(nextPokemon);
     document.getElementById('search').value = nextPokemon;
