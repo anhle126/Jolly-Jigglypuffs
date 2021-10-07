@@ -36,11 +36,16 @@ const TypeColor = {
 }
 
 document.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    document.getElementById('projectTitle').style.fontSize = 'x-large';
-    let pokemonID = document.getElementById('search').value.toLowerCase();
-    printInfo(pokemonID);
-    printPhoto(pokemonID);
+  try {
+    if (e.key === 'Enter') {
+      document.getElementById('projectTitle').style.fontSize = 'x-large';
+      let pokemonID = document.getElementById('search').value.toLowerCase();
+      printInfo(pokemonID);
+      printPhoto(pokemonID);
+    }
+  } catch (err) {
+    printInfo(-1);
+    printPhoto(-1);
   }
 });
 
@@ -69,11 +74,10 @@ document.addEventListener('click', (c) => {
       }
     }
 
-    let prevPokemon = pokemonArray[modulo(index-1, pokemonArray.length)];
+    let prevPokemon = pokemonArray[modulo(index - 1, pokemonArray.length)];
     document.getElementById('search').value = prevPokemon;
     printInfo(prevPokemon);
     printPhoto(prevPokemon);
-
   } else if (c.target === document.getElementById('next')) {
     let index = 0;
     let pokemonID = document.getElementById('search').value;
@@ -94,38 +98,49 @@ document.addEventListener('click', (c) => {
 });
 
 async function printInfo(pokemonID) {
-  const response = await fetch(baseURL + '/pokemon/' + pokemonID);
-  const infoData = await response.json();
-  //console.log(infoData);
-  let height = 'height: ' + infoData.height + ' m<br/>';
-  let weight = 'weight: ' + infoData.weight + ' lbs<br/>';
-  let stats = '';
+  try {
+    const response = await fetch(baseURL + '/pokemon/' + pokemonID);
+    const infoData = await response.json();
+    //console.log(infoData);
+    let height = 'height: ' + infoData.height + ' m<br/>';
+    let weight = 'weight: ' + infoData.weight + ' lbs<br/>';
+    let stats = '';
 
-  for (let i = 0; i < infoData.stats.length; i++) {
-    stats +=
-      infoData.stats[i].stat.name.replace(/-/g, ' ') +
-      ': ' +
-      infoData.stats[i].base_stat +
-      '<br/>';
-  }
+    for (let i = 0; i < infoData.stats.length; i++) {
+      stats +=
+        infoData.stats[i].stat.name.replace(/-/g, ' ') +
+        ': ' +
+        infoData.stats[i].base_stat +
+        '<br/>';
+    }
 
   document.getElementById('projectTitle').innerHTML =
     'INFO<br/><br/>' + height + weight + stats;
   //printPhoto(pokemonID);
 
-  document.getElementById('search').value = infoData.name;
-  document.getElementById('type1').innerHTML = infoData.types[0].type.name.charAt(0).toUpperCase() + infoData.types[0].type.name.substr(1);
-  document.getElementById('type1').style.backgroundColor = TypeColor[infoData.types[0].type.name];
-  console.log(infoData.types[0]);
-  if (infoData.types.length === 2) {
-    document.getElementById('type2').innerHTML = infoData.types[1].type.name.charAt().toUpperCase() + infoData.types[1].type.name.substr(1);
-    document.getElementById('type2').style.backgroundColor = TypeColor[infoData.types[1].type.name];
-  } else {
-    document.getElementById('type2').innerHTML = 'None';
-    document.getElementById('type2').style.backgroundColor = TypeColor['none'];
+    document.getElementById('search').value = infoData.name;
+    document.getElementById('type1').innerHTML =
+      infoData.types[0].type.name.charAt(0).toUpperCase() +
+      infoData.types[0].type.name.substr(1);
+    document.getElementById('type1').style.backgroundColor = 
+      TypeColor[infoData.types[0].type.name];
+    if (infoData.types.length === 2) {
+      document.getElementById('type2').innerHTML =
+        infoData.types[1].type.name.charAt().toUpperCase() +
+        infoData.types[1].type.name.substr(1);
+        document.getElementById('type2').style.backgroundColor =
+        TypeColor[infoData.types[1].type.name];
+    } else {
+      document.getElementById('type2').innerHTML = 'None';
+      document.getElementById('type2').style.backgroundColor = TypeColor['none'];
+    }
+  } catch (err) {
+    document.getElementById('projectTitle').innerHTML =
+      'NO INFO FOUND, INVALID ID';
+    document.getElementById('type1').innerHTML = 'Not Found';
+    document.getElementById('type2').innerHTML = 'Not Found';
   }
 }
-
 
 async function printMoves(pokemonID) {
   const response = await fetch(baseURL + '/pokemon/' + pokemonID);
@@ -149,14 +164,16 @@ async function printLocation(pokemonID) {
   const locations = await locationData.json();
 
   for (let i = 0; i < locations.length; i++) {
-    locationList += locations[i].location_area.name.replace(/-/g, ' ') + '<br/>';
+    locationList +=
+      locations[i].location_area.name.replace(/-/g, ' ') + '<br/>';
   }
 
   if (locationList === '') {
     locationList = 'CANNOT BE CAUGHT IN THE WILD<br/>';
   }
 
-  document.getElementById('projectTitle').innerHTML = 'LOCATIONS<br/><br/>' + locationList;
+  document.getElementById('projectTitle').innerHTML =
+    'LOCATIONS<br/><br/>' + locationList;
   printPhoto(pokemonID);
 }
 
@@ -176,22 +193,25 @@ async function printEvolution(pokemonID) {
     evolutionChain = evolutionChain[0].evolves_to;
   }
 
-  document.getElementById('projectTitle').innerHTML = 'EVOLUTION<br/><br/>' + resultEvolution;
+  document.getElementById('projectTitle').innerHTML =
+    'EVOLUTION<br/><br/>' + resultEvolution;
   printPhoto(pokemonID);
 }
 
-async function printPhoto (pokemonID) {
+async function printPhoto(pokemonID) {
+  try {
     const response = await fetch(baseURL + '/pokemon/' + pokemonID);
     const responseJSON = await response.json();
 
     let photoURL = responseJSON.sprites.front_default;
     document.getElementById('poke').src = photoURL;
+  } catch (err) {
+    document.getElementById('poke').src = './images/err_img.jpg';
+  }
 }
 
-
 function modulo(number, base) {
-    let result = number % base;
-    if (result < 0) 
-      return result + base;
-    return result;
+  let result = number % base;
+  if (result < 0) return result + base;
+  return result;
 }
