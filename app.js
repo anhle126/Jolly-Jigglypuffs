@@ -5,11 +5,10 @@ let pokemonArray = new Array();
 async function main() {
   const initialResponse = await fetch(baseURL + '/pokemon?offset=0&limit=151');
   const parsedResponse = await initialResponse.json();
-  let count = 0;
   for (let i = 0; i < parsedResponse.results.length; i++) {
     pokemonArray[i] = parsedResponse.results[i].name;
   }
-  console.log(pokemonArray);
+  //console.log(pokemonArray);
 }
 
 main();
@@ -43,6 +42,7 @@ document.addEventListener('click', (c) => {
     for (let i = 0; i < pokemonArray.length; i++) {
       if (pokemonArray[i] === pokemonID) {
         index = i;
+        //console.log(index);
         break;
       }
     }
@@ -50,6 +50,7 @@ document.addEventListener('click', (c) => {
     let prevPokemon = pokemonArray[modulo(index-1, pokemonArray.length)];
     document.getElementById('search').value = prevPokemon;
     printInfo(prevPokemon);
+    printPhoto(prevPokemon);
 
   } else if (c.target === document.getElementById('next')) {
     let index = 0;
@@ -63,27 +64,22 @@ document.addEventListener('click', (c) => {
     }
 
     let nextPokemon = pokemonArray[modulo(index + 1, pokemonArray.length)];
+    //console.log(nextPokemon);
     document.getElementById('search').value = nextPokemon;
     printInfo(nextPokemon);
+    printPhoto(nextPokemon);
   }
 });
 
 async function printInfo(pokemonID) {
   const response = await fetch(baseURL + '/pokemon/' + pokemonID);
   const infoData = await response.json();
-
+  //console.log(infoData);
   let height = 'height: ' + infoData.height + ' m<br/>';
   let weight = 'weight: ' + infoData.weight + ' lbs<br/>';
   let stats = '';
 
   for (let i = 0; i < infoData.stats.length; i++) {
-<<<<<<< HEAD
-    stats += infoData.stats[i].stat.name + ': ' + infoData.stats[i].base_stat + '<br/>';
-  }
-
-  document.getElementById('projectTitle').innerHTML = 'INFO<br/><br/>' + height + weight + stats;
-  printPhoto(pokemonID);
-=======
     stats +=
       infoData.stats[i].stat.name.replace(/-/g, ' ') +
       ': ' +
@@ -95,14 +91,13 @@ async function printInfo(pokemonID) {
     'INFO<br/><br/>' + height + weight + stats;
   //printPhoto(pokemonID);
 
-  //document.getElementById('search').value = infoData.name.charAt(0).toUpperCase() + infoData.name.substr(1);
+  document.getElementById('search').value = infoData.name;
   document.getElementById('type1').innerHTML = infoData.types[0].type.name.charAt(0).toUpperCase() + infoData.types[0].type.name.substr(1);
   if (infoData.types.length === 2) {
     document.getElementById('type2').innerHTML = infoData.types[1].type.name.charAt().toUpperCase() + infoData.types[1].type.name.substr(1);
   } else {
     document.getElementById('type2').innerHTML = 'None';
   }
->>>>>>> 921eb56553634823908dfa054d86530cc08975b2
 }
 
 
@@ -112,7 +107,7 @@ async function printMoves(pokemonID) {
   let moves = '';
 
   for (let i = 0; i < infoData.moves.length; i++) {
-    moves += infoData.moves[i].move.name + '<br/>';
+    moves += infoData.moves[i].move.name.replace(/-/g, ' ') + '<br/>';
   }
 
   document.getElementById('projectTitle').innerHTML = 'MOVES<br/><br/>' + moves;
@@ -128,7 +123,7 @@ async function printLocation(pokemonID) {
   const locations = await locationData.json();
 
   for (let i = 0; i < locations.length; i++) {
-    locationList += locations[i].location_area.name + '<br/>';
+    locationList += locations[i].location_area.name.replace(/-/g, ' ') + '<br/>';
   }
 
   if (locationList === '') {
@@ -158,7 +153,6 @@ async function printEvolution(pokemonID) {
   document.getElementById('projectTitle').innerHTML = 'EVOLUTION<br/><br/>' + resultEvolution;
   printPhoto(pokemonID);
 }
-
 
 async function printPhoto (pokemonID) {
     const response = await fetch(baseURL + '/pokemon/' + pokemonID);
