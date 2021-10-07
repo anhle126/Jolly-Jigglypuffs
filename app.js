@@ -8,7 +8,6 @@ async function main() {
   for (let i = 0; i < parsedResponse.results.length; i++) {
     pokemonArray[i] = parsedResponse.results[i].name;
   }
-  //console.log(pokemonArray);
 }
 
 main();
@@ -69,7 +68,6 @@ document.addEventListener('click', (c) => {
     for (let i = 0; i < pokemonArray.length; i++) {
       if (pokemonArray[i] === pokemonID) {
         index = i;
-        //console.log(index);
         break;
       }
     }
@@ -90,7 +88,6 @@ document.addEventListener('click', (c) => {
     }
 
     let nextPokemon = pokemonArray[modulo(index + 1, pokemonArray.length)];
-    //console.log(nextPokemon);
     document.getElementById('search').value = nextPokemon;
     printInfo(nextPokemon);
     printPhoto(nextPokemon);
@@ -101,7 +98,6 @@ async function printInfo(pokemonID) {
   try {
     const response = await fetch(baseURL + '/pokemon/' + pokemonID);
     const infoData = await response.json();
-    //console.log(infoData);
     let height = 'height: ' + infoData.height + ' m<br/>';
     let weight = 'weight: ' + infoData.weight + ' lbs<br/>';
     let stats = '';
@@ -116,7 +112,6 @@ async function printInfo(pokemonID) {
 
   document.getElementById('projectTitle').innerHTML =
     'INFO<br/><br/>' + height + weight + stats;
-  //printPhoto(pokemonID);
 
     document.getElementById('search').value = infoData.name;
     document.getElementById('type1').innerHTML =
