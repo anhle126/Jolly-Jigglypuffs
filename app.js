@@ -35,17 +35,17 @@ const TypeColor = {
 }
 
 document.addEventListener('keypress', (e) => {
-  try {
+  // try {
     if (e.key === 'Enter') {
       document.getElementById('projectTitle').style.fontSize = 'x-large';
       let pokemonID = document.getElementById('search').value.toLowerCase();
       printInfo(pokemonID);
       printPhoto(pokemonID);
     }
-  } catch (err) {
-    printInfo(-1);
-    printPhoto(-1);
-  }
+  // } catch (err) {
+  //   printInfo(-1);
+  //   printPhoto(-1);
+  // }
 });
 
 document.addEventListener('click', (c) => {

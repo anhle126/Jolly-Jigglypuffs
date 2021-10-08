@@ -88,6 +88,7 @@
 .arrow {
     width: 20%;
     background-color: peachpuff;
+    border: 2px solid maroon;
     cursor: pointer;
 }
 #tabs {
@@ -106,6 +107,8 @@
 #tabs button {
     height: 35px;
     width: 100%;
+    background-color: peachpuff;
+    border: 2px solid maroon;
 }
 #tabs td {
     width: 50%;
