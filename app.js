@@ -131,9 +131,9 @@ async function printInfo(pokemonID) {
     }
   } catch (err) {
     document.getElementById('projectTitle').innerHTML =
-      'NO INFO FOUND, INVALID ID';
-    document.getElementById('type1').innerHTML = 'Not Found';
-    document.getElementById('type2').innerHTML = 'Not Found';
+      'NO INFO FOUND<br>DOES NOT EXIST';
+    document.getElementById('type1').innerHTML = 'No Type';
+    document.getElementById('type2').innerHTML = 'No Type';
   }
 }
 
